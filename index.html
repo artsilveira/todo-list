@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="output.css">
+    <title>ToDo-List</title>
+</head>
+<body class="min-h-screen bg-bg text-text font-body">
+    <header class="py-6 border-b-2 border-border mb-4">
+        <h1 class="font-display text-2xl text-accent text-center md:text-4xl">
+            Ashen Ledger
+        </h1>
+    </header>
+
+    <main class="max-w-lg md:max-w-3xl mx-auto p-6">
+        <div class="bg-surface rounded" style="box-shadow: 0 4px 4px var(--color-shadow)">
+            <form class="flex flex-col md:flex-row md:items-center gap-4 p-4 text-text">
+                <label for="task" class="font-display">Task:</label>
+                <input type="text" id="task" name="task"        placeholder="Digite sua task:" required class="w-full py-4 px-2 border-2 border-border bg-surface-2 rounded">
+
+                <button type="submit" class="font-display text-bg bg-accent px-4 py-2 rounded cursor-pointer hover:bg-amber-400">Enviar</button>
+            </form>
+
+            <section>
+                <h2>Tarefas Pendentes</h2>
+                <ul>
+                    <li>
+                        <button></button>
+                        <span>Minha tarefa hardcoded</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Tarefas Concluídas</h2>
+                <ul>
+
+                </ul>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
