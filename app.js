@@ -4,6 +4,8 @@ let bconc = document.getElementById("btn-conc");
 let bpend = document.getElementById("btn-pend");
 let arrowc = document.getElementById("arrow-conc");
 let arrowp = document.getElementById("arrow-pend");
+let tarefasPendentes = [];
+let tarefasConcluidas = [];
 
 
 bpend.addEventListener("click", function() {
@@ -60,7 +62,7 @@ function renderTask() {
     ulPend.innerHTML = "";
     ulConc.innerHTML = "";
 
-    let tarefasPendentes = tarefas.filter(tarefa => tarefa.concluida === false);
+    tarefasPendentes = tarefas.filter(tarefa => tarefa.concluida === false);
 
     tarefasPendentes.forEach(function(tarefa) {
         const corPrioridade = tarefa.prioridade === 'alta' ? '#c0392b' : tarefa.prioridade === 'media' ? '#c7a24a' : '#8f98a3';
@@ -77,7 +79,7 @@ function renderTask() {
         `;
     });
 
-     let tarefasConcluidas = tarefas.filter(tarefa => tarefa.concluida === true);
+     tarefasConcluidas = tarefas.filter(tarefa => tarefa.concluida === true);
 
      tarefasConcluidas.forEach(function(tarefa) {
         ulConc.innerHTML += `
@@ -161,3 +163,15 @@ atualizarBarraNaTela();
 
 setInterval(atualizarBarraNaTela, 1000);
 
+const sortablePend = new Sortable(document.getElementById("ulPend"), {
+    animation: 150,
+    onEnd: function(evt) {
+        const itemMovido = tarefasPendentes.splice(evt.oldIndex, 1)[0];
+        tarefasPendentes.splice(evt.newIndex, 0, itemMovido);
+        
+        tarefas = tarefas.filter(t => t.concluida === true);
+        tarefas = [...tarefas, ...tarefasPendentes];
+        
+        salvarTarefas();
+    }
+});
