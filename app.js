@@ -67,6 +67,7 @@ function renderTask() {
             <li>
                 <button onclick="completarTarefa(${tarefa.id})">○</button>
                 ${tarefa.nome} - ${tarefa.categoria} - ${tarefa.prioridade}
+                <button onclick="deletarTarefa(${tarefa.id})" style="color: red; margin-left: 10px;">❌</button>
             </li>
         `;
     });
@@ -80,6 +81,7 @@ function renderTask() {
                 <span style="text-decoration: line-through; opacity: 0.6;">
                     ${tarefa.nome} - ${tarefa.categoria} - ${tarefa.prioridade}
                 </span>
+                <button onclick="deletarTarefa(${tarefa.id})" style="color: red; margin-left: 10px;">❌</button>
             </li>
         `;
     });
@@ -100,4 +102,11 @@ function completarTarefa(id) {
 function salvarTarefas() {
 
     localStorage.setItem("tarefas", JSON.stringify(tarefas));
+}
+
+function deletarTarefa(id) {
+    tarefas = tarefas.filter(tarefa => tarefa.id !== id);
+
+    renderTask();
+    salvarTarefas();
 }
