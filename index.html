@@ -21,6 +21,20 @@
                 <input type="text" id="task" name="task"        placeholder="Digite sua task:" required class="w-full py-4 px-2 border-2 border-border bg-surface-2 rounded">
 
                 <button type="submit" class="font-display text-bg bg-accent px-4 py-2 rounded cursor-pointer hover:bg-amber-400">Enviar</button>
+
+                <select id="categoria">
+                    <option value="body">Body</option>
+                    <option value="mind">Mind</option>
+                    <option value="knowledge">Knowledge</option>
+                    <option value="craft">Craft</option>
+                    <option value="Lore">Lore</option>
+                </select>
+
+                <select id="prioridade">
+                    <option value="alta">Alta</option>
+                    <option value="media">Média</option>
+                    <option value="baixa">Baixa</option>
+                </select>
             </form>
 
             <section>
@@ -33,7 +47,7 @@
                 <div id="pend">
                     <ul id="ulPend">
                         <li>
-                            hardcoded
+                            
                         </li>
                     </ul>
                 </div>
@@ -47,8 +61,11 @@
                 </button>
   
                 <div id="conc" class="hidden">
-                    meditate
-                    <!-- tarefas concluídas aqui -->
+                    <ul id="ulConc">
+                        <li>
+
+                        </li>
+                    </ul>
                 </div>
             </section>
         </div>

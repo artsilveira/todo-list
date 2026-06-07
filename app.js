@@ -18,16 +18,20 @@ bconc.addEventListener("click", function() {
     arrowc.style.transition = "transform 0.3s";
 });
 
-let tarefas = [];
+let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
+
+renderTask();
 
 function criarTarefa() {
     let task = document.getElementById("task").value;
+    let categ = document.getElementById("categoria").value;
+    let prior = document.getElementById("prioridade").value;
     
     let novaTarefa = {
         id: Date.now(),
         nome: task,
-        categoria: " ",
-        prioridade: " ",
+        categoria: categ,
+        prioridade: prior,
         concluida: false,
         criadaEm: Date.now(),
     }
@@ -35,8 +39,11 @@ function criarTarefa() {
     tarefas.push(novaTarefa);
 
     document.getElementById("task").value = "";
+    document.getElementById("categoria").value = "";
+    document.getElementById("prioridade").value = "";
 
     renderTask();
+    salvarTarefas();
 }
 
 let form = document.getElementById("form");
@@ -49,12 +56,48 @@ form.addEventListener("submit", function(event) {
 function renderTask() {
 
     let ulPend = document.getElementById("ulPend");
-
+    let ulConc = document.getElementById("ulConc");
     ulPend.innerHTML = "";
+    ulConc.innerHTML = "";
 
-    tarefas.forEach(function(tarefa) {
+    let tarefasPendentes = tarefas.filter(tarefa => tarefa.concluida === false);
+
+    tarefasPendentes.forEach(function(tarefa) {
         ulPend.innerHTML += `
-            <li>${tarefa.nome}</li>
+            <li>
+                <button onclick="completarTarefa(${tarefa.id})">○</button>
+                ${tarefa.nome} - ${tarefa.categoria} - ${tarefa.prioridade}
+            </li>
         `;
     });
+
+     let tarefasConcluidas = tarefas.filter(tarefa => tarefa.concluida === true);
+
+     tarefasConcluidas.forEach(function(tarefa) {
+        ulConc.innerHTML += `
+            <li>
+                <button disabled style="text-decoration: line-through; opacity: 0.6;">✓</button>
+                <span style="text-decoration: line-through; opacity: 0.6;">
+                    ${tarefa.nome} - ${tarefa.categoria} - ${tarefa.prioridade}
+                </span>
+            </li>
+        `;
+    });
+
 };
+
+function completarTarefa(id) {
+    let tarefaEncontrada = tarefas.find(tarefa => tarefa.id === id);
+
+     if (tarefaEncontrada) {
+        tarefaEncontrada.concluida = true;
+        renderTask();
+        salvarTarefas();
+    }
+
+}
+
+function salvarTarefas() {
+
+    localStorage.setItem("tarefas", JSON.stringify(tarefas));
+}
