@@ -110,3 +110,48 @@ function deletarTarefa(id) {
     renderTask();
     salvarTarefas();
 }
+
+function calcularProgressoDia() {
+    const agora = new Date();
+
+    const horas = agora.getHours();
+    const minutos = agora.getMinutes();
+    const segundos = agora.getSeconds();
+
+    const segundosPassados = (horas * 3600) + (minutos * 60) + segundos;
+    const totalSegundosDia = 86400;
+
+    const porcentagem = (segundosPassados / totalSegundosDia) * 100;
+
+    const segundosRestantes = totalSegundosDia - segundosPassados;
+    const hRestantes = Math.floor(segundosRestantes / 3600);
+    const mRestantes = Math.floor((segundosRestantes % 3600) / 60);
+    const sRestantes = segundosRestantes % 60;
+
+    const pad = (num) => String(num).padStart(2, '0');
+    const relogioRegressivo = `${pad(hRestantes)}:${pad(mRestantes)}:${pad(sRestantes)}`;
+
+    return {
+        porcentagem: parseFloat(porcentagem.toFixed(1)),
+        restante: relogioRegressivo
+    };
+}
+
+function atualizarBarraNaTela() {
+    const dados = calcularProgressoDia();
+    const barra = document.getElementById("barra-dia");
+    const textoTempo = document.getElementById("tempo-restante");
+
+    if (barra) {
+        barra.style.width = dados.porcentagem + "%";
+    }
+
+    if (textoTempo) {
+        textoTempo.innerText = `${dados.restante} para acabar o dia`;
+    }
+}
+
+atualizarBarraNaTela();
+
+setInterval(atualizarBarraNaTela, 1000);
+

@@ -37,8 +37,20 @@
                 </select>
             </form>
 
-            <section>
+            <div>
+                <div>
+                    <span>Progresso do dia</span>
+                    <span id="tempo-restante">--:--:-- restante</span>
+                </div>
 
+                <div style="background: var(--color-surface-2); height: 6px; border-radius: 9999px;">
+                    <div id="barra-dia" style="height: 6px; width: 0%; background: var(--color-accent); border-radius: 9999px; transition: width 1s;">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <section>
                 <button id="btn-pend">
                     <span>Tarefas Pendentes</span>
                     <span id="arrow-pend" class="inline-block transition-transform duration-300">▼</span>
