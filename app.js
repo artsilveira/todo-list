@@ -63,11 +63,16 @@ function renderTask() {
     let tarefasPendentes = tarefas.filter(tarefa => tarefa.concluida === false);
 
     tarefasPendentes.forEach(function(tarefa) {
+        const corPrioridade = tarefa.prioridade === 'alta' ? '#c0392b' : tarefa.prioridade === 'media' ? '#c7a24a' : '#8f98a3';
         ulPend.innerHTML += `
-            <li>
-                <button onclick="completarTarefa(${tarefa.id})">○</button>
-                ${tarefa.nome} - ${tarefa.categoria} - ${tarefa.prioridade}
-                <button onclick="deletarTarefa(${tarefa.id})" style="color: red; margin-left: 10px;">❌</button>
+            <li style="display:flex; align-items:center; gap:12px; padding:14px 24px; border-bottom:1px solid var(--color-border);">
+                <button onclick="completarTarefa(${tarefa.id})" style="width:20px; height:20px; border-radius:50%; border:2px solid var(--color-accent); background:transparent; cursor:pointer; flex-shrink:0; transition: background 0.2s;" onmouseover="this.style.background='var(--color-accent)'" onmouseout="this.style.background='transparent'"></button>
+                <div style="flex:1; min-width:0;">
+                    <p style="color:var(--color-text); font-size:0.9rem;">${tarefa.nome}</p>
+                    <span style="color:var(--color-muted); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em;">${tarefa.categoria}</span>
+                </div>
+                <span style="width:8px; height:8px; border-radius:50%; background:${corPrioridade}; flex-shrink:0;"></span>
+                <button onclick="deletarTarefa(${tarefa.id})" style="color:var(--color-muted); background:transparent; border:none; cursor:pointer; font-size:1rem; flex-shrink:0; opacity:0.5;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.5'">✕</button>
             </li>
         `;
     });
@@ -76,12 +81,13 @@ function renderTask() {
 
      tarefasConcluidas.forEach(function(tarefa) {
         ulConc.innerHTML += `
-            <li>
-                <button disabled style="text-decoration: line-through; opacity: 0.6;">✓</button>
-                <span style="text-decoration: line-through; opacity: 0.6;">
-                    ${tarefa.nome} - ${tarefa.categoria} - ${tarefa.prioridade}
-                </span>
-                <button onclick="deletarTarefa(${tarefa.id})" style="color: red; margin-left: 10px;">❌</button>
+            <li style="display:flex; align-items:center; gap:12px; padding:14px 24px; border-bottom:1px solid var(--color-border); opacity:0.5;">
+                <button disabled style="width:20px; height:20px; border-radius:50%; border:2px solid var(--color-accent); background:var(--color-accent); cursor:default; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:var(--color-bg); font-size:0.7rem;">✓</button>
+                <div style="flex:1; min-width:0;">
+                    <p style="color:var(--color-text); font-size:0.9rem; text-decoration:line-through;">${tarefa.nome}</p>
+                    <span style="color:var(--color-muted); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em;">${tarefa.categoria}</span>
+                </div>
+                <button onclick="deletarTarefa(${tarefa.id})" style="color:var(--color-muted); background:transparent; border:none; cursor:pointer; font-size:1rem; flex-shrink:0; opacity:0.5;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.5'">✕</button>
             </li>
         `;
     });
@@ -147,7 +153,7 @@ function atualizarBarraNaTela() {
     }
 
     if (textoTempo) {
-        textoTempo.innerText = `${dados.restante} para acabar o dia`;
+        textoTempo.innerText = `${dados.restante}`;
     }
 }
 

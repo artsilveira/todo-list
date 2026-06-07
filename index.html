@@ -12,17 +12,19 @@
         <h1 class="font-display text-2xl text-accent text-center md:text-4xl">
             Ashen Ledger
         </h1>
+        <p class="text-muted text-center text-sm mt-1 font-body tracking-widest uppercase">
+            Daily Task Ledger
+        </p>
     </header>
 
     <main class="max-w-lg md:max-w-3xl mx-auto p-6">
-        <div class="bg-surface rounded" style="box-shadow: 0 4px 4px var(--color-shadow)">
-            <form id="form" class="flex flex-col md:flex-row md:items-center gap-4 p-4 text-text">
-                <label for="task" class="font-display">Task:</label>
-                <input type="text" id="task" name="task"        placeholder="Digite sua task:" required class="w-full py-4 px-2 border-2 border-border bg-surface-2 rounded">
+        <div class="bg-surface rounded-xl border border-border p-6 md:p-8" style="box-shadow: 0 4px 4px var(--color-shadow)">
+            <form id="form" class="flex flex-col md:flex-row md:items-center gap-3 p-6 border-b border-border text-text">
+                <input type="text" id="task" name="task"        placeholder="Digite sua task:" required class="w-full py-2.5 px-4 border border-border bg-surface-2 rounded-lg text-text placeholder:text-muted text-sm focus:outline-none focus:border-accent transition-colors">
 
                 <button type="submit" class="font-display text-bg bg-accent px-4 py-2 rounded cursor-pointer hover:bg-amber-400">Enviar</button>
 
-                <select id="categoria">
+                <select id="categoria" class="px-4 py-2.5 border border-border bg-surface rounded-lg text-muted text-sm cursor-pointer focus:outline-none focus:border-accent transition-colors w-full">
                     <option value="body">Body</option>
                     <option value="mind">Mind</option>
                     <option value="knowledge">Knowledge</option>
@@ -30,30 +32,30 @@
                     <option value="Lore">Lore</option>
                 </select>
 
-                <select id="prioridade">
+                <select id="prioridade" class="px-4 py-2.5 border border-border bg-surface rounded-lg text-muted text-sm cursor-pointer focus:outline-none focus:border-accent transition-colors w-full">
                     <option value="alta">Alta</option>
                     <option value="media">Média</option>
                     <option value="baixa">Baixa</option>
                 </select>
             </form>
 
-            <div>
-                <div>
-                    <span>Progresso do dia</span>
-                    <span id="tempo-restante">--:--:-- restante</span>
+            <div class="px-6 py-4 border-b border-border">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-display text-sm text-accent-2 tracking-wider uppercase">Progresso do dia</span>
+                    <span id="tempo-restante" class="text-muted text-sm">--:--:-- restante</span>
                 </div>
 
-                <div style="background: var(--color-surface-2); height: 6px; border-radius: 9999px;">
-                    <div id="barra-dia" style="height: 6px; width: 0%; background: var(--color-accent); border-radius: 9999px; transition: width 1s;">
+                <div class="w-full rounded-full" style="background: var(--color-surface-2); height: 6px; border-radius: 9999px;">
+                    <div id="barra-dia" class="rounded-full" style="height: 8px; width: 0%; background: var(--color-accent); border-radius: 9999px; transition: width 1s;">
                         
                     </div>
                 </div>
             </div>
 
             <section>
-                <button id="btn-pend">
-                    <span>Tarefas Pendentes</span>
-                    <span id="arrow-pend" class="inline-block transition-transform duration-300">▼</span>
+                <button id="btn-pend" class="w-full flex items-center justify-between px-6 py-4 hover:bg-surface-2 transition-colors cursor-pointer border-b border-border">
+                    <span class="font-display text-sm tracking-wider uppercase text-accent-2">Tarefas Pendentes</span>
+                    <span id="arrow-pend" class="inline-block transition-transform duration-300 text-muted text-xs">▼</span>
                 </button>
                 
                 <div id="pend">
@@ -67,9 +69,9 @@
 
             
             <section>
-                <button id="btn-conc">
-                    <span>Tarefas Concluídas</span>
-                    <span id="arrow-conc" class="inline-block transition-transform duration-300">▼</span>
+                <button id="btn-conc" class="w-full flex items-center justify-between px-6 py-4 hover:bg-surface-2 transition-colors cursor-pointer border-b border-border">
+                    <span class="font-display text-sm tracking-wider uppercase text-accent-2">Tarefas Concluídas</span>
+                    <span id="arrow-conc" class="inline-block transition-transform duration-300 text-muted text-xs">▼</span>
                 </button>
   
                 <div id="conc" class="hidden">
