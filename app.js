@@ -67,7 +67,7 @@ function renderTask() {
     tarefasPendentes.forEach(function(tarefa) {
         const corPrioridade = tarefa.prioridade === 'alta' ? '#c0392b' : tarefa.prioridade === 'media' ? '#c7a24a' : '#8f98a3';
         ulPend.innerHTML += `
-            <li style="display:flex; align-items:center; gap:12px; padding:14px 24px; border-bottom:1px solid var(--color-border);">
+            <li style="display:flex; align-items:center; gap:12px; padding:14px 24px; border-bottom:1px solid var(--color-border); animation: taskEnter 0.5s ease forwards;">
                 <button onclick="completarTarefa(${tarefa.id})" style="width:20px; height:20px; border-radius:50%; border:2px solid var(--color-accent); background:transparent; cursor:pointer; flex-shrink:0; transition: background 0.2s;" onmouseover="this.style.background='var(--color-accent)'" onmouseout="this.style.background='transparent'"></button>
                 <div style="flex:1; min-width:0;">
                     <p style="color:var(--color-text); font-size:0.9rem;">${tarefa.nome}</p>
@@ -83,7 +83,7 @@ function renderTask() {
 
      tarefasConcluidas.forEach(function(tarefa) {
         ulConc.innerHTML += `
-            <li style="display:flex; align-items:center; gap:12px; padding:14px 24px; border-bottom:1px solid var(--color-border); opacity:0.5;">
+            <li style="display:flex; align-items:center; gap:12px; padding:14px 24px; border-bottom:1px solid var(--color-border); animation: taskEnter 0.5s ease forwards;">
                 <button disabled style="width:20px; height:20px; border-radius:50%; border:2px solid var(--color-accent); background:var(--color-accent); cursor:default; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:var(--color-bg); font-size:0.7rem;">✓</button>
                 <div style="flex:1; min-width:0;">
                     <p style="color:var(--color-text); font-size:0.9rem; text-decoration:line-through;">${tarefa.nome}</p>
